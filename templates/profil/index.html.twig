@@ -1,18 +1,28 @@
+{# templates/profil/index.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfilController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Profil de {{ profil.utilisateur.nom }}</h1>
 
-<div class="example-wrapper">
+    <div>
+        <h2>Information Professionnelles</h2>
+        <p>{{ profil.informationProfessionnelles }}</p>
+    </div>
 
-       <hr>
-    <h1>Profil de {{ user.nom }} {{ user.prenom }}</h1>
-    <p>Email : {{ user.email }}</p>
-    <p>Date d'inscription : {{ user.dateInscription|date('d-m-Y H:i:s') }}</p>
-</div>
+    <div>
+        <h2>Information Contact</h2>
+        <p>{{ profil.informationContact }}</p>
+    </div>
+
+    <div>
+        <h2>Photo de Profil</h2>
+        {% if hasPhoto %}
+            <img src="{{ asset('uploads/images/' ~ profil.photoProfil) }}" alt="Photo de Profil" style="max-width: 200px; max-height: 200px;">
+            <a href="{{ path('profil_modifier_photo', { id: profil.id }) }}" class="btn">Changer la Photo</a>
+        {% else %}
+            <p>Aucune photo de profil</p>
+            <a href="{{ path('profil_modifier_photo', { id: profil.id }) }}" class="btn">Ajouter une Photo</a>
+        {% endif %}
+    </div>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le Profil{% endblock %}
+
+{% block body %}
+    <h1>Modifier votre profil</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.photoProfil) }}
+        {{ form_row(form.informationProfessionnelles) }}
+        {{ form_row(form.informationContact) }}
+
+        <button class="btn btn-primary">Mettre à jour</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('user_profile', {id: profil.utilisateur.id}) }}">Retour au profil</a>
+{% endblock %}

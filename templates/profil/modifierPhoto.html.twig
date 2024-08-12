@@ -1,0 +1,14 @@
+{# templates/profil/modifierPhoto.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier la Photo de Profil</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.photoProfil) }}
+        <button class="btn">Sauvegarder</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('user_profile', { id: form.vars.data.utilisateur.id }) }}" class="btn">Retour au Profil</a>
+{% endblock %}
