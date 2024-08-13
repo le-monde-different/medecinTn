@@ -5,24 +5,14 @@
 {% block body %}
     <h1>Profil de {{ profil.utilisateur.nom }}</h1>
 
-    <div>
-        <h2>Information Professionnelles</h2>
-        <p>{{ profil.informationProfessionnelles }}</p>
-    </div>
+    {% if hasPhoto %}
+        <img src="{{ asset('uploads/images/' ~ profil.photoProfil) }}" alt="Photo de profil" />
+    {% else %}
+        <p>Aucune photo de profil</p>
+    {% endif %}
 
-    <div>
-        <h2>Information Contact</h2>
-        <p>{{ profil.informationContact }}</p>
-    </div>
+    <p><strong>Informations Professionnelles:</strong> {{ profil.informationProfessionnelles }}</p>
+    <p><strong>Informations de Contact:</strong> {{ profil.informationContact }}</p>
 
-    <div>
-        <h2>Photo de Profil</h2>
-        {% if hasPhoto %}
-            <img src="{{ asset('uploads/images/' ~ profil.photoProfil) }}" alt="Photo de Profil" style="max-width: 200px; max-height: 200px;">
-            <a href="{{ path('profil_modifier_photo', { id: profil.id }) }}" class="btn">Changer la Photo</a>
-        {% else %}
-            <p>Aucune photo de profil</p>
-            <a href="{{ path('profil_modifier_photo', { id: profil.id }) }}" class="btn">Ajouter une Photo</a>
-        {% endif %}
-    </div>
+    <a href="{{ path('profil_modifier', {'id': profil.id}) }}" class="btn btn-primary">Modifier le Profil</a>
 {% endblock %}

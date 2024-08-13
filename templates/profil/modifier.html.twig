@@ -1,17 +1,16 @@
+{# templates/profil/modifier.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier le Profil{% endblock %}
-
 {% block body %}
-    <h1>Modifier votre profil</h1>
+    <h1>Modifier le Profil</h1>
 
     {{ form_start(form) }}
         {{ form_row(form.photoProfil) }}
         {{ form_row(form.informationProfessionnelles) }}
         {{ form_row(form.informationContact) }}
-
-        <button class="btn btn-primary">Mettre à jour</button>
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
     {{ form_end(form) }}
 
-    <a href="{{ path('user_profile', {id: profil.utilisateur.id}) }}">Retour au profil</a>
+    <a href="{{ path('user_profile', {id: profil.utilisateur.id}) }}" class="btn btn-secondary">Retour au profil</a>
 {% endblock %}
