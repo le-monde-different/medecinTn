@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
-    private $router;
+    private RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {
@@ -19,12 +19,21 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): RedirectResponse
     {
         $user = $token->getUser();
+
         if ($user instanceof \App\Entity\Utilisateur) {
-            $profileUrl = $this->router->generate('user_profile', ['id' => $user->getId()]);
-            return new RedirectResponse($profileUrl);
+            // Vérifier si l'utilisateur a le rôle ROLE_ADMIN
+            if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+                // Rediriger vers la page d'administration
+                $url = $this->router->generate('app_admin'); 
+            } else {
+                // Rediriger vers la page de profil utilisateur
+                $url = $this->router->generate('user_profile', ['id' => $user->getId()]);
+            }
+
+            return new RedirectResponse($url);
         }
 
-        // Si l'utilisateur n'est pas une instance de Utilisateur, redirigez vers une route par défaut
-        return new RedirectResponse($this->router->generate('default_route'));
+        // Si l'utilisateur n'est pas une instance de Utilisateur, rediriger vers une route par défaut
+        return new RedirectResponse($this->router->generate('default_route')); // Assurez-vous que la route 'default_route' existe
     }
 }
