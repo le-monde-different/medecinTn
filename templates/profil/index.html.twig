@@ -14,5 +14,5 @@
     <p><strong>Informations Professionnelles:</strong> {{ profil.informationProfessionnelles }}</p>
     <p><strong>Informations de Contact:</strong> {{ profil.informationContact }}</p>
 
-    <a href="{{ path('profil_modifier', {'id': profil.id}) }}" class="btn btn-primary">Modifier le Profil</a>
+    <a href="{{ path('profil_modifier', {'id': profil.utilisateur.id}) }}" class="btn btn-primary">Modifier le Profil</a>
 {% endblock %}

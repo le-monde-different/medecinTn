@@ -3,15 +3,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User List</h1>
-
-    <a href="{{ path('admin_user_new') }}">Create New User</a>
+    <h1>Users List</h1>
 
     <table>
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
                 <th>Email</th>
+                <th>Rôles</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,10 +20,17 @@
             {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.prenom }}</td>
                     <td>{{ user.email }}</td>
                     <td>
-                        <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Edit</a>
-                        <form action="{{ path('admin_user_delete', {'id': user.id}) }}" method="post" style="display:inline;">
+                        {% for role in user.roles %}
+                            {{ role }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_user_edit', { id: user.id }) }}">Edit</a>
+                        <form action="{{ path('admin_user_delete', { id: user.id }) }}" method="post" style="display:inline;">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
                             <button type="submit">Delete</button>
                         </form>
@@ -31,4 +39,5 @@
             {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('admin_user_new') }}">Create New User</a>
 {% endblock %}

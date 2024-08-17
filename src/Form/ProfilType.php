@@ -21,6 +21,7 @@ class ProfilType extends AbstractType
             ->add('photoProfil', FileType::class, [
                 'label' => 'Photo de profil',
                 'required' => false,
+                'mapped' => false,
                 'constraints' => [
                     new Assert\File([
                         'maxSize' => '5M',

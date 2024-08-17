@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Profil;
+use App\Entity\Utilisateur;
 use App\Form\ProfilType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
