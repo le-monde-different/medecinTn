@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Reponse{% endblock %}
+{% block title %}Répondre{% endblock %}
 
 {% block body %}
-    <h1>Create new Reponse</h1>
+    <h1>Répondre à la question</h1>
 
-    {{ include('reponse/_form.html.twig') }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">Soumettre</button>
+    {{ form_end(form) }}
 
-    <a href="{{ path('app_reponse_index') }}">back to list</a>
+    <a href="{{ path('app_question_show', {'id': reponse.question.id}) }}">Retour à la question</a>
 {% endblock %}

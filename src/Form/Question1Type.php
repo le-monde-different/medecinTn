@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\Categorie;
 use App\Entity\Question;
-use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,16 +15,9 @@ class Question1Type extends AbstractType
         $builder
             ->add('titre')
             ->add('contenu')
-            ->add('dateCreation', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('Utilisateur', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
-            ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom', // Utilisation du nom de la catégorie comme label
             ])
         ;
     }

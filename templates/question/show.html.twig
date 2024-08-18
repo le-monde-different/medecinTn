@@ -19,12 +19,10 @@
                 <th>Contenu</th>
                 <td>{{ question.contenu }}</td>
             </tr>
-            <tr>
-                <th>DateCreation</th>
-                <td>{{ question.dateCreation ? question.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
+           
         </tbody>
     </table>
+<a href="{{ path('app_reponse_new', {'id': question.id}) }}">Créer une nouvelle réponse</a>
 
     <a href="{{ path('app_question_index') }}">back to list</a>
 

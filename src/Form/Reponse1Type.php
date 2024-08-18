@@ -16,9 +16,7 @@ class Reponse1Type extends AbstractType
     {
         $builder
             ->add('contenu')
-            ->add('dateCreation', null, [
-                'widget' => 'single_text',
-            ])
+
             ->add('score')
             ->add('question', EntityType::class, [
                 'class' => Question::class,

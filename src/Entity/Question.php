@@ -37,9 +37,11 @@ class Question
     #[ORM\ManyToOne(inversedBy: 'questions')]
     private ?Categorie $categorie = null;
 
+
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
+        $this->dateCreation = new \DateTime();  // Initialisation automatique de la date
     }
 
     public function getId(): ?int

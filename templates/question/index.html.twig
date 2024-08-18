@@ -3,7 +3,7 @@
 {% block title %}Question index{% endblock %}
 
 {% block body %}
-    <h1>Question index</h1>
+    <h1>Forum</h1>
 
     <table class="table">
         <thead>
@@ -11,8 +11,9 @@
                 <th>Id</th>
                 <th>Titre</th>
                 <th>Contenu</th>
-                <th>DateCreation</th>
-                <th>actions</th>
+                <th>Date de Creation</th>
+                <th>Utilisateur</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,18 +23,35 @@
                 <td>{{ question.titre }}</td>
                 <td>{{ question.contenu }}</td>
                 <td>{{ question.dateCreation ? question.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ question.utilisateur.nom }}</td>
                 <td>
-                    <a href="{{ path('app_question_show', {'id': question.id}) }}">show</a>
-                    <a href="{{ path('app_question_edit', {'id': question.id}) }}">edit</a>
+                    <a href="{{ path('app_question_show', {'id': question.id}) }}">Voir</a>
+                    <a href="{{ path('app_question_edit', {'id': question.id}) }}">Modifier</a>
                 </td>
             </tr>
+            {% if question.reponses|length > 0 %}
+            <tr>
+                <td colspan="6">
+                    <h4>Réponses :</h4>
+                    <ul>
+                        {% for reponse in question.reponses %}
+                            <li>
+                                <p>{{ reponse.contenu }}</p>
+                                <p><strong>Répondu par :</strong> {{ reponse.utilisateur.nom }}</p>
+                                <p><strong>Date :</strong> {{ reponse.dateCreation ? reponse.dateCreation|date('Y-m-d H:i:s') : '' }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endif %}
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="6">Aucune question trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_question_new') }}">Create new</a>
+    <a href="{{ path('app_question_new') }}" class="btn btn-primary">Poser une nouvelle question</a>
 {% endblock %}

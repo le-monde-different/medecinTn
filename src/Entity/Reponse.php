@@ -29,6 +29,12 @@ class Reponse
     #[ORM\ManyToOne(inversedBy: 'reponses')]
     private ?Utilisateur $utilisateur = null;
 
+    public function __construct()
+    {
+        // Définit la date de création à l'heure actuelle lors de la création de l'entité
+        $this->dateCreation = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
